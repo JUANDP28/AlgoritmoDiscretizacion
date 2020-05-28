@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AlgoritmoDiscretizacion {
     class Program {
 
-        List<Double> elemento1 = new List<double>() { 
+        List<Double> fila1 = new List<double>() {
         5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.8, 4.8, 4.3, 5.8,
         5.7, 5.4, 5.1, 5.7, 5.1, 5.4, 5.1, 4.6, 5.1, 4.8, 5.0, 5.0, 5.2, 5.2, 4.7,
         4.8, 5.4, 5.2, 5.5, 4.9, 5.0, 5.5, 4.9, 4.4, 5.1, 5.0, 4.5, 4.4, 5.0, 5.1,
@@ -16,7 +17,7 @@ namespace AlgoritmoDiscretizacion {
         6.9, 5.6, 7.7, 6.3, 6.7, 7.2, 6.2, 6.1, 6.4, 7.2, 7.4, 7.9, 6.4, 6.3, 6.1,
         7.7, 6.3, 6.4, 6.0, 6.9, 6.7, 6.9, 5.8, 6.8, 6.7, 6.7, 6.3, 6.5, 6.2, 5.9};
 
-        List<Double> elemento2 = new List<double>() {
+        List<Double> fila2 = new List<double>() {
         3.0, 3.4, 3.0, 2.5, 3.0, 3.3, 3.2, 2.7, 3.1, 3.1, 3.1, 3.0, 3.1, 3.4, 3.0,
         2.6, 2.8, 2.8, 3.8, 2.8, 3.0, 2.8, 3.0, 2.8, 3.2, 3.3, 2.7, 2.8, 2.8, 3.2,
         2.2, 2.6, 3.8, 3.0, 3.2, 2.8, 2.5, 3.0, 2.7, 3.2, 3.6, 2.5, 2.9, 2.5, 3.0,
@@ -28,7 +29,7 @@ namespace AlgoritmoDiscretizacion {
         3.2, 3.4, 3.5, 3.4, 3.0, 3.4, 3.3, 3.6, 3.7, 3.4, 3.8, 3.8, 3.5, 3.9, 4.4,
         4.0, 3.0, 3.0, 3.4, 3.7, 3.1, 2.9, 3.4, 3.4, 3.9, 3.6, 3.1, 3.2, 3.0, 3.5};
 
-        List<Double> elemento3 = new List<double>() {
+        List<Double> fila3 = new List<double>() {
         1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.6, 1.4, 1.1, 1.2,
         1.5, 1.3, 1.4, 1.7, 1.5, 1.7, 1.5, 1.0, 1.7, 1.9, 1.6, 1.6, 1.5, 1.4, 1.6,
         1.6, 1.5, 1.5, 1.4, 1.5, 1.2, 1.3, 1.5, 1.3, 1.5, 1.3, 1.3, 1.3, 1.6, 1.9,
@@ -40,7 +41,7 @@ namespace AlgoritmoDiscretizacion {
         5.7, 4.9, 6.7, 4.9, 5.7, 6.0, 4.8, 4.9, 5.6, 5.8, 6.1, 6.4, 5.6, 5.1, 5.6,
         6.1, 5.6, 5.5, 4.8, 5.4, 5.6, 5.1, 5.1, 5.9, 5.7, 5.2, 5.0, 5.2, 5.4, 5.1};
 
-        List<Double> elemento4 = new List<double>() {
+        List<Double> fila4 = new List<double>() {
         0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2,
         0.4, 0.4, 0.3, 0.3, 0.3, 0.2, 0.4, 0.2, 0.5, 0.2, 0.2, 0.4, 0.2, 0.2, 0.2,
         0.2, 0.4, 0.1, 0.2, 0.1, 0.2, 0.2, 0.1, 0.2, 0.2, 0.3, 0.3, 0.2, 0.6, 0.4,
@@ -52,11 +53,67 @@ namespace AlgoritmoDiscretizacion {
         2.3, 2.0, 2.0, 1.8, 2.1, 1.8, 1.8, 1.8, 2.1, 1.6, 1.9, 2.0, 2.2, 1.5, 1.4,
         2.3, 2.4, 1.8, 1.8, 2.1, 2.4, 2.3, 1.9, 2.3, 2.5, 2.3, 1.9, 2.0, 2.3, 1.8};
 
+        List<Double> valoresUnicos = new List<double>();
+        List<Double> valoresCAIM = new List<double>();
+        Double minimo = 0.0, maximo = 0.0, CAIMGlobal = 0.0;
+
+        /// <summary>
+        /// Metodo que inicia el proceso por fila
+        /// </summary>
+        /// <param name="listaDisponible"></param>
+        public void IniciarAlgoritmo (List<Double> listaDisponible) {
+
+            MinMax(listaDisponible);
+            ValoresUnicos(listaDisponible);
+            CAIMGlobal = 0.0;
+
+            do {
 
 
+            } while ();
+        }
+
+        /// <summary>
+        /// Metodo que busca el minimo y el maximo de cada fila
+        /// </summary>
+        /// <param name="listaDisponible">Lista en la que buscara el minimo
+        /// y el maximo</param>
+        public void MinMax (List<Double> listaDisponible) {
+
+            minimo = listaDisponible.Min();
+            maximo = listaDisponible.Max();
+        }
+
+        /// <summary>
+        /// Metodo que obtiene los valores unicos del atributo
+        /// </summary>
+        /// <param name="listaDisponible"></param>
+        public void ValoresUnicos (List<Double> listaDisponible) {
+
+            foreach (Double valor in listaDisponible) {
+
+                if (!valoresUnicos.Contains(valor)) {
+
+                    valoresUnicos.Add(valor);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Metodo que inicia el algoritmo
+        /// </summary>
+        /// <param name="args"></param>
         static void Main (string [] args) {
 
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("");
+            Console.WriteLine("=============== ALGORITMO DE CAIM ===============");
+            Console.WriteLine("");
+            Program algoritmo = new Program();
+
+            algoritmo.IniciarAlgoritmo(algoritmo.fila1);
+            algoritmo.IniciarAlgoritmo(algoritmo.fila2);
+            algoritmo.IniciarAlgoritmo(algoritmo.fila3);
+            algoritmo.IniciarAlgoritmo(algoritmo.fila4);
         }
     }
 }
