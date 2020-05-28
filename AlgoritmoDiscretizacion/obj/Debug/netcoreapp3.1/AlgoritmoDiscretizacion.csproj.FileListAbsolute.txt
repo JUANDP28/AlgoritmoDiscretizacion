@@ -1,0 +1,13 @@
+C:\Users\juanc\Documents\GitHub\AlgoritmoDiscretizacion\AlgoritmoDiscretizacion\bin\Debug\netcoreapp3.1\AlgoritmoDiscretizacion.exe
+C:\Users\juanc\Documents\GitHub\AlgoritmoDiscretizacion\AlgoritmoDiscretizacion\bin\Debug\netcoreapp3.1\AlgoritmoDiscretizacion.deps.json
+C:\Users\juanc\Documents\GitHub\AlgoritmoDiscretizacion\AlgoritmoDiscretizacion\bin\Debug\netcoreapp3.1\AlgoritmoDiscretizacion.runtimeconfig.json
+C:\Users\juanc\Documents\GitHub\AlgoritmoDiscretizacion\AlgoritmoDiscretizacion\bin\Debug\netcoreapp3.1\AlgoritmoDiscretizacion.runtimeconfig.dev.json
+C:\Users\juanc\Documents\GitHub\AlgoritmoDiscretizacion\AlgoritmoDiscretizacion\bin\Debug\netcoreapp3.1\AlgoritmoDiscretizacion.dll
+C:\Users\juanc\Documents\GitHub\AlgoritmoDiscretizacion\AlgoritmoDiscretizacion\bin\Debug\netcoreapp3.1\AlgoritmoDiscretizacion.pdb
+C:\Users\juanc\Documents\GitHub\AlgoritmoDiscretizacion\AlgoritmoDiscretizacion\obj\Debug\netcoreapp3.1\AlgoritmoDiscretizacion.csprojAssemblyReference.cache
+C:\Users\juanc\Documents\GitHub\AlgoritmoDiscretizacion\AlgoritmoDiscretizacion\obj\Debug\netcoreapp3.1\AlgoritmoDiscretizacion.AssemblyInfoInputs.cache
+C:\Users\juanc\Documents\GitHub\AlgoritmoDiscretizacion\AlgoritmoDiscretizacion\obj\Debug\netcoreapp3.1\AlgoritmoDiscretizacion.AssemblyInfo.cs
+C:\Users\juanc\Documents\GitHub\AlgoritmoDiscretizacion\AlgoritmoDiscretizacion\obj\Debug\netcoreapp3.1\AlgoritmoDiscretizacion.csproj.CoreCompileInputs.cache
+C:\Users\juanc\Documents\GitHub\AlgoritmoDiscretizacion\AlgoritmoDiscretizacion\obj\Debug\netcoreapp3.1\AlgoritmoDiscretizacion.dll
+C:\Users\juanc\Documents\GitHub\AlgoritmoDiscretizacion\AlgoritmoDiscretizacion\obj\Debug\netcoreapp3.1\AlgoritmoDiscretizacion.pdb
+C:\Users\juanc\Documents\GitHub\AlgoritmoDiscretizacion\AlgoritmoDiscretizacion\obj\Debug\netcoreapp3.1\AlgoritmoDiscretizacion.genruntimeconfig.cache
