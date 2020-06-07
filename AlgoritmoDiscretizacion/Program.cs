@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace AlgoritmoDiscretizacion {
+
     class Program {
 
         List<Double> fila1 = new List<double>() {
@@ -54,23 +55,77 @@ namespace AlgoritmoDiscretizacion {
         2.3, 2.4, 1.8, 1.8, 2.1, 2.4, 2.3, 1.9, 2.3, 2.5, 2.3, 1.9, 2.0, 2.3, 1.8};
 
         List<Double> valoresUnicos = new List<double>();
-        List<Double> valoresCAIM = new List<double>();
-        Double minimo = 0.0, maximo = 0.0, CAIMGlobal = 0.0;
+        List<Intervalo> intervalos = new List<Intervalo>();
+        List<Double> esquemaD = new List<double>();
+        Double minimo = 0.0, maximo = 0.0, caimGlobal;
+        int s = 3;
 
         /// <summary>
         /// Metodo que inicia el proceso por fila
         /// </summary>
         /// <param name="listaDisponible"></param>
-        public void IniciarAlgoritmo (List<Double> listaDisponible) {
+        public void IniciarAlgoritmo(List<Double> fila) {
 
-            MinMax(listaDisponible);
-            ValoresUnicos(listaDisponible);
-            CAIMGlobal = 0.0;
+            Console.WriteLine("");
+            Console.WriteLine("==================================================");
+            MinMax(fila);
+            ValoresUnicos(fila);
+            esquemaD.Clear();
+            esquemaD.Add(this.minimo);
+            esquemaD.Add(this.maximo);
+            Console.WriteLine("");
+            Console.WriteLine("D = " + ImprimirLista(this.esquemaD));
+            this.caimGlobal = 0.0;
+            Console.WriteLine("CAIM Global = " + this.caimGlobal);
+            int k = 1;
+            Boolean bandera = true;
 
             do {
 
+                foreach (Double valor in this.valoresUnicos) {
 
-            } while ();
+                    List<Double> auxEsquemaD = new List<double>();
+
+                    foreach(Double valor2 in esquemaD) {
+
+                        auxEsquemaD.Add(valor2);
+                    }
+
+                    if(!auxEsquemaD.Contains(valor)) {
+
+                        auxEsquemaD.Add(valor);
+                        OrdenarLista(auxEsquemaD);
+                        this.intervalos.Add(new Intervalo(
+                            auxEsquemaD, CrearMatriz(auxEsquemaD, fila)));
+                    }
+
+                    auxEsquemaD.Clear();
+                }
+
+                Intervalo caimMayor = CAIMMayor(this.intervalos);
+                
+                if(caimMayor.caim > this.caimGlobal || k < s){
+
+                    this.caimGlobal = caimMayor.caim;
+                    this.esquemaD.Clear();
+                } else {
+
+                    bandera = false;
+                    Console.WriteLine("");
+                    Console.WriteLine("CAIM Global: " + this.caimGlobal);
+                    Console.WriteLine("D: " + ImprimirLista(this.esquemaD));
+                }
+
+                k++;
+                this.intervalos.Clear();
+                foreach(Double valor in caimMayor.esquemaD) {
+
+                    this.esquemaD.Add(valor);
+                }
+
+            } while (bandera == true);
+
+            this.valoresUnicos.Clear();
         }
 
         /// <summary>
@@ -78,38 +133,154 @@ namespace AlgoritmoDiscretizacion {
         /// </summary>
         /// <param name="listaDisponible">Lista en la que buscara el minimo
         /// y el maximo</param>
-        public void MinMax (List<Double> listaDisponible) {
+        public void MinMax(List<Double> fila) {
 
-            minimo = listaDisponible.Min();
-            maximo = listaDisponible.Max();
+            this.minimo = fila.Min();
+            this.maximo = fila.Max();
+            Console.WriteLine("");
+            Console.WriteLine("Mínimo: " + this.minimo);
+            Console.WriteLine("Máximo: " + this.maximo);
         }
 
         /// <summary>
         /// Metodo que obtiene los valores unicos del atributo
         /// </summary>
         /// <param name="listaDisponible"></param>
-        public void ValoresUnicos (List<Double> listaDisponible) {
+        public void ValoresUnicos(List<Double> fila) {
 
-            foreach (Double valor in listaDisponible) {
+            foreach(Double valor in fila.OrderBy(x => x)) {
 
-                if (!valoresUnicos.Contains(valor)) {
+                if(!this.valoresUnicos.Contains(valor)) {
 
-                    valoresUnicos.Add(valor);
+                    this.valoresUnicos.Add(valor);
                 }
             }
+
+            Console.WriteLine("");
+            Console.WriteLine("B = " + ImprimirLista(this.valoresUnicos));
+        }
+
+        /// <summary>
+        /// Metodo para imprimir una lista
+        /// </summary>
+        /// <param name="listaDisponible">Lista que se desea imprimir</param>
+        /// <returns>Variable String con la lista a imprimir</returns>
+        public String ImprimirLista(List<Double> lista) {
+
+            String impresion = "{ ";
+            int tamanio = lista.Count;
+            int iterador = 1;
+
+            foreach(Double valor in lista) {
+
+                if(iterador == tamanio) {
+
+                    impresion += valor + " }";
+
+                } else {
+
+                    impresion += valor + ", ";
+                }
+
+                iterador++;
+            }
+
+            return impresion;
+        }
+
+        /// <summary>
+        /// Metodo que crea la matrizCuantica de un intervalo
+        /// </summary>
+        /// <param name="esquema">esuqema posible</param>
+        /// <param name="fila">Fila o f a utilizar</param>
+        /// <returns>Matriz cunatica creada</returns>
+        public int[,] CrearMatriz(List<Double> esquema, List<Double> fila) {
+
+            int[,] matrizCuantica = new int[3, (esquema.Count - 1)];
+            int elementosClase = 0, i = 0;
+
+            while(i < 3) {
+
+                foreach(Double valor in fila) {
+
+                    for(int j = 0; j < (esquema.Count - 1); j++) {
+
+                        if(j == esquema.Count-2) {
+
+                            if(valor >= esquema[j] && valor <= esquema[j+1]) {
+                                matrizCuantica[i, j] += 1;
+                            }
+
+                        } else {
+
+                            if(valor >= esquema[j] && valor < esquema[j+1]) {
+                                matrizCuantica[i, j] += 1;
+                            }
+                        }
+                    }
+
+                    elementosClase++;
+
+                    if(elementosClase == 50) {
+                        elementosClase = 0;
+                        i++;
+                    }
+                }
+            }
+
+            return matrizCuantica;
+        }
+
+        /// <summary>
+        /// Metodod que ordena la lista de menor a mayor
+        /// </summary>
+        /// <param name="lista"></param>
+        public void OrdenarLista(List<Double> lista) {
+
+            List<Double> auxiliar = new List<double>();
+
+            foreach(Double valor in lista.OrderBy(x => x)) {
+
+                auxiliar.Add(valor);
+            }
+
+            lista.Clear();
+
+            foreach(Double valor in auxiliar) {
+
+                lista.Add(valor);
+            }
+        }
+
+        /// <summary>
+        /// Metodod que encuentra el CAIM mayor de una lista
+        /// </summary>
+        /// <param name="lista">Lista proporcionada con Intervalos</param>
+        /// <returns>Intervalo con el CAIM mayor</returns>
+        public Intervalo CAIMMayor(List<Intervalo> lista) {
+
+            Intervalo mayor = lista[0];
+
+            foreach(Intervalo elemento in lista) {
+
+                if(mayor.caim < elemento.caim) {
+
+                    mayor = elemento;
+                }
+            }
+
+            return mayor;
         }
 
         /// <summary>
         /// Metodo que inicia el algoritmo
         /// </summary>
         /// <param name="args"></param>
-        static void Main (string [] args) {
+        static void Main(string[] args) {
 
             Console.WriteLine("");
             Console.WriteLine("=============== ALGORITMO DE CAIM ===============");
-            Console.WriteLine("");
             Program algoritmo = new Program();
-
             algoritmo.IniciarAlgoritmo(algoritmo.fila1);
             algoritmo.IniciarAlgoritmo(algoritmo.fila2);
             algoritmo.IniciarAlgoritmo(algoritmo.fila3);
